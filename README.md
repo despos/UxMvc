@@ -1,2 +1,2 @@
-# uxmvc
-Demos for Pluralsight
+# UX MVC
+Demos for Pluralsight course "UI Best Practices Playbook for ASP.NET MVC" 
