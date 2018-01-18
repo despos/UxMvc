@@ -1,0 +1,117 @@
+﻿@model Mvc.Ux.Demos.Models.Demo.CountryListViewModel
+
+@section adhoc_css {
+    <link rel="stylesheet" href="~/content/styles/typeahead.css" type="text/css" />
+}
+@section adhoc_scripts_top {
+    <script type="text/javascript" src="~/content/scripts/typeahead.bundle.min.js"></script>
+    <script type="text/javascript" src="~/content/scripts/typeahead.container.js"></script>
+}
+@section adhoc_scripts_bottom {
+    <script type="text/javascript" src="~/content/scripts/modules/module-picking.js"></script>
+}
+
+<div class="container">
+    <h2><b>MOD 01 ::</b> Picking Items from a (Long) List</h2>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8" id="list">
+            <!-- Classic long dropdown -->
+            <div style="padding: 10px;">
+                <h4 class="text-primary">A very loooooong list of countries</h4>
+                <select id="ddCountries" style="font-size: 1.3em; padding: 12px; width: 100%" onchange="go3()">
+                    @foreach (var country in Model.Countries)
+                    {
+                        <option value="@country.CountryCode">@country.CountryName</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Smart textbox -->
+            <div style="padding: 10px">
+                <h4 class="text-primary">Pick a country by name</h4>
+                <input type="hidden" id="countrycode1" />
+                <div class="input-group">
+                    <input type="text" id="country1" class="form-control input-lg" placeholder="Enter country name ...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-lg btn-primary" type="button" id="buttonFind1" onclick="go1()">Go!</button>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Even smarter textbox -->
+            <div style="padding: 10px">
+                <h4 class="text-primary">Pick a country by name/code/continent</h4>
+                <input type="hidden" id="countrycode2" />
+                <div class="input-group">
+                    <input type="text" id="country2" class="form-control input-lg" placeholder="Country, continent, ISO2 code ...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-lg btn-primary" type="button" id="buttonFind2" onclick="go2()">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drill-down (just readonly) -->
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div style="position:fixed">
+                <span class="label label-info" id="v_code" style="margin-left:20px"></span>
+
+                <div id="drilldownViewer" style="background: #ddd; padding: 10px; border: solid 2px #111">
+                    <dl class="dl-horizontal">
+                        <dt>Name</dt>
+                        <dd><span id="v_name"></span></dd>
+                        <dt>Capital</dt>
+                        <dd><span id="v_capital"></span></dd>
+                        <dt>Continent</dt>
+                        <dd><span id="v_continent"></span></dd>
+                        <dt>Population</dt>
+                        <dd><span id="v_population"></span> <span class="text-muted">people</span></dd>
+                        <dt>Area</dt>
+                        <dd><span id="v_area"></span> <span class="text-muted">kmq</span></dd>
+                        <dt>Languages</dt>
+                        <dd><span id="v_languages"></span></dd>
+                        <dt>Currency</dt>
+                        <dd><span id="v_currency"></span></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Autocomplete config -->
+<script type="text/javascript">
+    new TypeAheadContainer({
+        targetSelector: $("#country1"),
+        buddySelector: $("#countrycode1"),
+        submitSelector: $("#buttonFind1"),
+        postOnSelection: true,
+        maxNumberOfHints: 20,
+        hintUrl: "/hint/countries?filter=%QUERY"
+    }).attach();
+</script>
+
+<script type="text/javascript">
+    new TypeAheadContainer({
+        targetSelector: $("#country2"),
+        buddySelector: $("#countrycode2"),
+        submitSelector: $("#buttonFind2"),
+        postOnSelection: true,
+        hintUrl: "/hint/countries2?filter=%QUERY"
+    }).attach();
+</script>
+
+<script type="text/javascript">
+    function go1() {
+        var code = $("#countrycode1").val();
+        expand(code);
+    }
+    function go2() {
+        var code = $("#countrycode2").val();
+        expand(code);
+    }
+    function go3() {
+        var code = $("#ddCountries").val();
+        expand(code);
+    }
+</script>

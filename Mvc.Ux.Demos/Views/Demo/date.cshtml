@@ -1,0 +1,47 @@
+﻿<h3 style="m1argin: 0; line-height: 14px">MODULE 01</h3>
+<span>Picking Items from a (Long) List</span> 
+<hr/>
+
+@section adhoc_css
+{
+    <link rel="stylesheet" href="~/Content/Styles/bootstrap-datepicker3.min.css" type="text/css" />
+}
+@section adhoc_scripts_top
+{
+    <script type="text/javascript" src="~/Content/Scripts/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="//wurfl.io/wurfl.js"></script>
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        DATE-PICKER<br/>
+        <input type="text" class="form-control" date>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+        MOBILE DETECTION<br />
+        <input type="text" class="form-control" id="mdate">
+    </div>
+
+    <div class="col-xs-12 visible-xs">
+        <img src="~/Content/Images/dates-htm.jpg" alt="" width="60%" />
+    </div>
+</div>
+ 
+
+<script>
+    // Blindly uses a datepicker
+    $("input[date]").datepicker({
+        // More 
+    });
+
+    // Datepicker or native
+    if (WURFL.form_factor === "Smartphone" ||
+        WURFL.form_factor === "Feature Phone") {
+        $("#mdate").attr("type", "date");
+    } else {
+        $("#mdate").datepicker();  // Whatever date picker plugin you use
+    }
+
+</script>
+

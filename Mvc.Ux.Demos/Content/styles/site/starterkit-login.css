@@ -1,0 +1,39 @@
+﻿a:hover, a:visited, a:link, a:active {
+    text-decoration: none!important;    
+}
+
+.noshow {
+    display: none;
+}
+
+.login-body {
+    background: #444;
+}
+
+.login-subtitle {
+    text-align: center;
+    font-size: 1.9em;
+    font-family: arial;
+    text-transform: uppercase;
+    color: #fff0f5;
+    padding: 10px;
+}
+
+.login-box-header {
+    text-align: center;
+    font-size: 1.4em;
+    font-family: arial;
+    text-transform: uppercase;
+}
+
+.login-applogo {
+    width:400px;
+    display:block;
+    margin: auto;
+}
+
+.login-customerlogo {
+    display:block;
+    margin: auto;
+}
+
