@@ -36,7 +36,10 @@ namespace Mvc.Ux.Demos.Controllers
             var all = new CountryRepository().All();
             var list = (from country in all
                 let match = String.Format("{0} {1} {2} {3}",
-                    country.CountryCode, country.CountryName, country.ContinentName, country.CurrencyCode).ToLower()
+                    country.CountryCode, 
+                    country.CountryName, 
+                    country.ContinentName, 
+                    country.CurrencyCode).ToLower()
                 where match.Contains(filter)
                 select new AutoCompleteItem()
                 {
