@@ -1,4 +1,10 @@
-﻿@section adhoc_css
+﻿@using Expoware.Youbiquitous.Extensions
+@model Mvc.Ux.Demos.Models.Demo.DateViewModel
+
+@{
+    var dateAsString = Model.TheDate.GetValueOrDefault().ToString("d MMMM yyyy");
+}
+@section adhoc_css
 {
     <link rel="stylesheet" href="~/Content/Styles/bootstrap-datepicker3.min.css" type="text/css" />
 }
@@ -8,27 +14,135 @@
     <script type="text/javascript" src="//wurfl.io/wurfl.js"></script>
 }
 
-<div class="row">
-    <div class="col-xs-12 col-sm-6">
-        DATE-PICKER<br/>
-        <input type="text" class="form-control" date>
-    </div>
-
-    <div class="col-xs-12 col-sm-6">
-        MOBILE DETECTION<br />
-        <input type="text" class="form-control" id="mdate">
-    </div>
-
-    <div class="col-xs-12 visible-xs">
-        <img src="~/Content/Images/dates-htm.jpg" alt="" width="60%" />
-    </div>
+<div class="container">
+    <h2><b>MOD 03 ::</b> Letting Users Pick a Date</h2>
+    
+    <form method="post" style="margin-top: 40px">
+        <div class="row">
+            <div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-2">
+                DATE-PICKER<br />
+                <input type="text" class="form-control" 
+                       autocomplete="off"
+                       name="selectedDate" 
+                       value="@dateAsString" 
+                       date>                
+            </div>
+            <div class="col-xs-12 col-sm-5 col-md-4">
+                MOBILE DETECTION<br />
+                <input type="text" class="form-control" id="mdate">
+            </div>
+        </div>
+        <div class="row bg-info" style="margin: 30px;">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="padding:10px">
+                MANUAL (type and tab out)<br />
+                <input class="form-control" name="dob" id="dob" type="text"
+                       maxlength="10"
+                       value="3/4.17"
+                       data-original-value="3/4.17"
+                       onblur="__dateChanged(this)">
+            </div>
+        </div>
+        <hr/>
+        <div class="row text-center">
+            <button class="btn btn-lg btn-danger">SAVE</button>
+            <div id="output">
+                Last selected date is <b>@dateAsString</b>
+            </div>
+        </div>
+    </form>
 </div>
+
+
+
+<script>
+    __WeekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    __Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    function __completeYear (year) {
+        if (year < 0)
+            return -1;
+        if (year < 30)
+            year += 2000;
+        else if (year < 100)
+            year += 1900;
+        else if (year < 1000)
+            year += 1000;
+        return year;
+    }
+    function __canCreateDate (year, month, day) {
+        if (day < 1 || day > 31)
+            return false;
+        if (month < 1 || month > 12)
+            return false;
+
+        // Day/Month together
+        if (month === 2 && day > 29)
+            return false;
+        if (month === 2 && day === 29 && (!((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)))
+            return false;
+        if ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30)
+            return false;
+
+        return true;
+    }
+    function __humanizeDate (date) {
+        var wd = __WeekDays[date.getDay()];
+        var mo = __Months[date.getMonth()];
+        var display = wd + ", " + date.getDate() + " " + mo + " " + date.getFullYear();
+        return display;
+    }
+</script>
+<script>
+    function __dateChanged(elem) {
+        var attempted = $(elem).val();
+        var id = $(elem).attr('id');
+        if (attempted.length === 0)
+            return true;
+        
+        attempted = attempted.replace(/[./ ]/g, "-");
+        var original = $(elem).data("original-value");
+        var edited = (original !== attempted);
+        var dateTokens = attempted.split('-');
+        if (dateTokens.length === 3) {
+            try {
+                var d = parseInt(dateTokens[0]);
+                var m = parseInt(dateTokens[1]);
+                var y = parseInt(dateTokens[2]);
+                y = __completeYear(y);
+
+                if (__canCreateDate(y, m, d)) {
+                    var date = new Date(y, m - 1, d, 0, 0, 0, 0);
+                    var humanized = __humanizeDate(date);
+                    if ((d !== m) && (d <= 12) && edited) {
+                        alert("The date is understood as\n\n" +
+                            humanized + "\n\n" +
+                            "Is this what you mean?");
+                    }
+
+                    var newdate = d + "-" + m + "-" + y;
+                    $(elem).val(newdate);
+                    $(elem).data("original-value", newdate);
+                    return true;
+                }
+            } catch (err) { }
+        }
+
+        // Error
+        alert("Invalid date");
+        return false;
+    }
+</script>
+
+
+
+
  
 
 <script>
     // Blindly uses a datepicker
     $("input[date]").datepicker({
-        // More 
+        autoclose: true,
+        format: "d MM yyyy"
+        // For more options see: https://uxsolutions.github.io/bootstrap-datepicker
     });
 
     // Datepicker or native
@@ -38,6 +152,5 @@
     } else {
         $("#mdate").datepicker();  // Whatever date picker plugin you use
     }
-
 </script>
 

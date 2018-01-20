@@ -7,8 +7,10 @@
 // Youbiquitous.net
 //
 
+using System;
 using System.Web.Mvc;
 using Mvc.Ux.Demos.Application;
+using Mvc.Ux.Demos.Models.Demo;
 
 namespace Mvc.Ux.Demos.Controllers
 {
@@ -20,6 +22,23 @@ namespace Mvc.Ux.Demos.Controllers
         {
             var model = _service.GetCountryListViewModel();
             return View(model);
+        }
+
+        [HttpGet]
+        [ActionName("date")]
+        public ActionResult DateForGet(DateTime? selectedDate)
+        {
+            var model = new DateViewModel();
+            if (selectedDate.HasValue)
+                model.TheDate = selectedDate;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("date")]
+        public ActionResult DateForPost(DateTime? selectedDate)
+        {
+            return RedirectToAction("Date", new {selectedDate = selectedDate });
         }
     }
 }
