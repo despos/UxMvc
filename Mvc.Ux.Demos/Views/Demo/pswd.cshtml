@@ -1,0 +1,130 @@
+﻿@model Mvc.Ux.Demos.Models.ViewModelBase
+
+<div class="container">
+    <h2><b>MOD 04 ::</b> Providing a Better Experience for Changing Passwords</h2>
+    <div style="margin-top: 60px"></div>
+
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <h3>
+            <strong>New Password</strong>
+            <small class="pull-right" style="zoom: 1.3">
+                @Html.CheckBox("password-mode", false, new { onclick = "hideChars()" })
+                <label for="password-mode" id="password-mode-label">
+                    Hide chars
+                </label>
+            </small>
+        </h3>
+        <div class="input-group">
+            <input type="text" name="password" id="password"
+                   class="form-control input-lg"
+                   maxlength="30"
+                   oninput="verifyPswd()"
+                   autocomplete="off"
+                   required="required"
+                   placeholder="Password...">
+            <span class="input-group-btn">
+                <button id="buttonChange" class="btn btn-lg btn-danger" 
+                        type="button"
+                        disabled>Change</button>
+            </span>
+            <span class="input-group-btn">
+                <button class="btn btn-lg btn-default" 
+                        type="button" 
+                        onclick="generatePassword(10)">Suggest</button>
+            </span>
+        </div>
+        <span id="password-strength" style="font-size: 1.5em"></span>
+    </div>
+</div>
+
+<script>
+    var __Strings = {
+        "PswdVeryStrong":   "Very strong",
+        "PswdStrong":       "Strong",
+        "PswdGood":         "Good",
+        "PswdWeak":         "Weak"
+    };
+</script>
+<script>
+    // Invoked when the user clicks to generate a new random password
+    function generatePassword(count) {
+        var pswd = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        for (var i = 0; i < count; i++)
+            pswd += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        $("#password").val(pswd);
+        $("#password").focus();
+        $("#buttonChange").removeAttr("disabled");
+        verifyPswd();
+    }
+
+// Switch between password/text typing mode 
+    function hideChars() {
+        var shouldHide = $("#password-mode:checked").is(":checked");  
+        $("#password").attr("type", shouldHide ? "password" : "text");
+    }
+
+// Provide feedback about the strength of the password
+    function verifyPswd() {
+        var password = $("#password").val();
+        var length = password.length;
+
+        if (length >= 4) {
+            $("#buttonChange").removeAttr("disabled");
+        } else {
+            $("#buttonChange").attr("disabled", "disabled");
+            $("#password-strength").attr("class", "").html("");
+            return;
+        }
+
+        var score = scorePassword(password);
+        var outcome = "";
+        var bgClass = "";
+        if (score < 30) {
+            outcome = __Strings["PswdWeak"];
+            bgClass = "pswd-weak";
+        } else if (score < 45) {
+            outcome = __Strings["PswdGood"];
+            bgClass = "pswd-good";
+        } else if (score < 65) {
+            outcome = __Strings["PswdStrong"];
+            bgClass = "pswd-strong";
+        } else if (score >= 65) {
+            outcome = __Strings["PswdVeryStrong"];
+            bgClass = "pswd-verystrong";
+        }
+
+        $("#password-strength").attr("class", "").addClass(bgClass).html(outcome);
+    }
+
+// Calculates a score for the password
+    function scorePassword(password) {
+        var score = 0;
+        if (!password)
+            return score;
+
+        // award every unique letter until 5 repetitions
+        var letters = new Object();
+        for (var i = 0; i < password.length; i++) {
+            letters[password[i]] = (letters[password[i]] || 0) + 1;
+            score += 5.0 / letters[password[i]];
+        }
+
+        // bonus points for mixing it up
+        var variations = {
+            digits: /\d/.test(password),
+            lower: /[a-z]/.test(password),
+            upper: /[A-Z]/.test(password),
+            nonWords: /\W/.test(password),
+        }
+
+        var variationCount = 0;
+        for (var check in variations) {
+            variationCount += (variations[check] === true) ? 1 : 0;
+        }
+        score += (variationCount - 1) * 10;
+
+        return parseInt(score);
+    }
+</script>

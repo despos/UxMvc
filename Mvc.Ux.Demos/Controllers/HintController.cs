@@ -1,7 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////
 //
 // Pluralsight : UI Best Practices Playbook for ASP.NET MVC
-// M01 - Picking Items from a (Long) List
 //
 // Author: Dino Esposito
 // Youbiquitous.net
@@ -29,8 +28,7 @@ namespace Mvc.Ux.Demos.Controllers
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-
-
+        
         public JsonResult Countries2(string filter = "")
         {
             var all = new CountryRepository().All();

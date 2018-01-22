@@ -1,14 +1,13 @@
 ﻿///////////////////////////////////////////////////////////////////
 //
 // Pluralsight : UI Best Practices Playbook for ASP.NET MVC
-// M01 - Picking Items from a (Long) List
 //
 // Author: Dino Esposito
 // Youbiquitous.net
 //
 
 using System.Web.Mvc;
-using Mvc.Ux.Picking.Models;
+using Mvc.Ux.Demos.Models;
 
 namespace Mvc.Ux.Demos.Controllers
 {

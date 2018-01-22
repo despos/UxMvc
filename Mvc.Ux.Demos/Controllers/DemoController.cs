@@ -1,7 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////
 //
 // Pluralsight : UI Best Practices Playbook for ASP.NET MVC
-// M01 - Picking Items from a (Long) List
 //
 // Author: Dino Esposito
 // Youbiquitous.net
@@ -10,6 +9,7 @@
 using System;
 using System.Web.Mvc;
 using Mvc.Ux.Demos.Application;
+using Mvc.Ux.Demos.Models;
 using Mvc.Ux.Demos.Models.Demo;
 
 namespace Mvc.Ux.Demos.Controllers
@@ -18,12 +18,21 @@ namespace Mvc.Ux.Demos.Controllers
     {
         private readonly DemoService _service = new DemoService();
 
+        /// <summary>
+        /// MODULE 2: Picking Items from a Long List
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Picking()
         {
             var model = _service.GetCountryListViewModel();
             return View(model);
         }
 
+        /// <summary>
+        /// MODULE 3: Letting Users Enter a Date
+        /// </summary>
+        /// <param name="selectedDate"></param>
+        /// <returns></returns>
         [HttpGet]
         [ActionName("date")]
         public ActionResult DateForGet(DateTime? selectedDate)
@@ -34,11 +43,26 @@ namespace Mvc.Ux.Demos.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// MODULE 3: Letting Users Enter a Date
+        /// </summary>
+        /// <param name="selectedDate"></param>
+        /// <returns></returns>
         [HttpPost]
         [ActionName("date")]
         public ActionResult DateForPost(DateTime? selectedDate)
         {
             return RedirectToAction("Date", new {selectedDate = selectedDate });
+        }
+
+        /// <summary>
+        /// MODULE 4: Providing a Better Experience for Changing Passwords
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Pswd()
+        {
+            var model = new ViewModelBase();
+            return View(model);
         }
     }
 }

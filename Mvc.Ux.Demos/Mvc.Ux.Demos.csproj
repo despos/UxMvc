@@ -97,6 +97,7 @@
     <Content Include="Views\Demo\picking.cshtml" />
     <Content Include="Views\Demo\date.cshtml" />
     <Content Include="Views\Home\tech.cshtml" />
+    <Content Include="Views\Demo\pswd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

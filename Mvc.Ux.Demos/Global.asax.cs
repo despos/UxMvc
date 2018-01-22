@@ -1,7 +1,6 @@
 ﻿///////////////////////////////////////////////////////////////////
 //
 // Pluralsight : UI Best Practices Playbook for ASP.NET MVC
-// M01 - Picking Items from a (Long) List
 //
 // Author: Dino Esposito
 // Youbiquitous.net
@@ -9,7 +8,6 @@
 
 using System;
 using System.Web.Routing;
-using Mvc.Ux.Picking;
 
 namespace Mvc.Ux.Demos
 {

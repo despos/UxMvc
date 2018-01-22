@@ -1,21 +1,20 @@
-﻿@using Expoware.Youbiquitous.Extensions
-@model Mvc.Ux.Demos.Models.Demo.DateViewModel
+﻿@model Mvc.Ux.Demos.Models.Demo.DateViewModel
 
 @{
     var dateAsString = Model.TheDate.GetValueOrDefault().ToString("d MMMM yyyy");
 }
-@section adhoc_css
-{
+@section adhoc_css {
     <link rel="stylesheet" href="~/Content/Styles/bootstrap-datepicker3.min.css" type="text/css" />
 }
-@section adhoc_scripts_top
-{
+@section adhoc_scripts_top {
     <script type="text/javascript" src="~/Content/Scripts/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="//wurfl.io/wurfl.js"></script>
 }
 
 <div class="container">
     <h2><b>MOD 03 ::</b> Letting Users Pick a Date</h2>
+    <div class="alert alert-warning text-center">
+        <span style="font-size: 120%">https://github.com/uxsolutions/bootstrap-datepicker</span>
+    </div>
     
     <form method="post" style="margin-top: 40px">
         <div class="row">
@@ -29,13 +28,20 @@
             </div>
             <div class="col-xs-12 col-sm-5 col-md-4">
                 MOBILE DETECTION<br />
-                <input type="text" class="form-control" id="mdate">
+                <input type="text" class="form-control" 
+                       autocomplete="off"
+                       id="mdate">
             </div>
         </div>
         <div class="row bg-info" style="margin: 30px;">
             <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="padding:10px">
-                MANUAL (type and tab out)<br />
+                CLASSIC (HTML5)<br />
+                <input class="form-control" type="date">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3" style="padding:10px">
+                MANUAL <b>dd-mm-yyyy</b> (type and tab out)<br />
                 <input class="form-control" name="dob" id="dob" type="text"
+                       autocomplete="off"
                        maxlength="10"
                        value="3/4.17"
                        data-original-value="3/4.17"
@@ -91,6 +97,7 @@
         return display;
     }
 </script>
+
 <script>
     function __dateChanged(elem) {
         var attempted = $(elem).val();
@@ -132,25 +139,26 @@
     }
 </script>
 
-
-
-
- 
-
 <script>
     // Blindly uses a datepicker
     $("input[date]").datepicker({
         autoclose: true,
+        orientation: "left bottom",
         format: "d MM yyyy"
         // For more options see: https://uxsolutions.github.io/bootstrap-datepicker
     });
 
-    // Datepicker or native
+    // Datepicker or native (https://wurfl.io for device detection)
     if (WURFL.form_factor === "Smartphone" ||
         WURFL.form_factor === "Feature Phone") {
         $("#mdate").attr("type", "date");
     } else {
-        $("#mdate").datepicker();  // Whatever date picker plugin you use
+        $("#mdate").datepicker({   // Whatever date picker plugin you use
+            autoclose: true,
+            orientation: "left bottom",
+            format: "d MM yyyy"
+            // For more options see: https://uxsolutions.github.io/bootstrap-datepicker
+        }); 
     }
 </script>
 
