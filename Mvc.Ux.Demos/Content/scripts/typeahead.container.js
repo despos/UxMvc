@@ -8,9 +8,6 @@
 // OPTIONAL LINKS 
 //      handlebars-v4-0-2            
 
-/// <reference path="~/Content/Scripts/jquery-1.10.2.min.js" />
-/// <reference path="~/Content/Scripts/typeahead.bundle.min.js" />
-
 
 var TypeAheadContainerSettings = function () {
     var that = {};

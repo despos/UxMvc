@@ -1,0 +1,142 @@
+﻿@model Mvc.Ux.Demos.Models.ViewModelBase
+
+@section adhoc_css {
+    <link rel="stylesheet" href="~/content/styles/bootstrap-select.min.css" type="text/css" />
+}
+@section adhoc_scripts_top {
+    <script type="text/javascript" src="~/content/scripts/bootstrap-select.min.js"></script>
+}
+
+<style>
+    .largeCheckbox {
+        zoom: 1.8;
+    }
+</style>
+
+<style>
+    /* Based on https://bootsnipp.com/snippets/featured/fancy-bootstrap-checkboxes */
+    .form-group input[type="checkbox"] {
+        display: none;
+    }
+    .form-group input[type="checkbox"] + .btn-group > label span {
+        width: 20px;
+    }
+    .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+        display: none;
+    }
+    .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+        display: inline-block;   
+    }
+    .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+        display: inline-block;
+    }
+    .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+        display: none;   
+    }
+</style>
+
+<form method="post">
+    <div class="container">
+        <h2><b>MOD 05 ::</b> Taking Care of Those That Bootstrap Left Behind</h2>
+        <div style="margin-top: 60px"></div>
+    
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-5 col-lg-offset-1">
+                <h3>Zoomed Checkboxes</h3><hr />
+                <input type="checkbox" id="checkbox1" name="checkbox1" class="largeCheckbox" />
+                <label for="checkbox1" class="largeCheckbox">Zoomed</label>
+                <span style="margin-left: 30px">&nbsp;</span>
+                <input type="checkbox" id="checkbox2" name="checkbox2" />
+                <label for="checkbox2">Normal</label>
+                <br /><br /><br />
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-5">
+                <h3>Bootstrap-based Checkboxes</h3><hr />
+                <div class="form-group">
+                    <input type="checkbox"
+                           name="checkme1"
+                           id="checkme1" />
+                    <div class="btn-group">
+                        <label for="checkme1" class="btn btn-primary">
+                            <span class="fa fa-check"></span>
+                            <span> </span>
+                        </label>
+                        <label for="checkme1" class="btn btn-default">
+                            Check me and something will happen (if coded)
+                        </label>
+                    </div>
+                </div>
+                <strong>https://bootsnipp.com/snippets/featured/fancy-bootstrap-checkboxes</strong>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px"></div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-5 col-lg-offset-1">
+                <h3>Bootstrap-based DropdownList</h3>
+                <div class="form-group">
+                    <select class="selectpicker form-control" 
+                            name="yourSkills1"
+                            data-width="fit"
+                            title="Tell us about your skills">
+                        <option style="color: #cd5c5c;"
+                                data-icon="fa-building" 
+                                data-subtext="Architecture"
+                                value="S">Software</option>
+                        <option data-icon="fa-area-chart"
+                                value="M">Math</option>
+                        <option data-icon="fa-picture-o"
+                                value="A">Arts</option>
+                    </select>
+                </div>
+                <strong>https://silviomoreto.github.io/bootstrap-select</strong>
+            </div>
+        
+            <div class="col-xs-12 col-sm-6 col-lg-5">
+                <h3>Custom DropdownList</h3>
+                <div class="btn-group">
+                    <button type="button" 
+                            class="btn btn-default dropdown-toggle" 
+                            data-toggle="dropdown">
+                        <span class="custom-dropdown-title">No skills</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                    <input type="hidden" id="yourSkills2" name="yourSkills2" value="" />
+                    <ul class="dropdown-menu custom-dropdown">
+                        <li><a href="#" data-value="S">Software</a></li>
+                        <li><a href="#" data-value="M">Math</a></li>
+                        <li><a href="#" data-value="P">Philosophy</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" data-value="A">Arts</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row text-center">
+            <hr/>
+            <button class="btn btn-lg btn-danger">SAVE</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(".selectpicker").selectpicker({
+        iconBase: "fa"
+    });
+</script>
+
+<script>
+    $(".custom-dropdown li a").click(function () {
+        var selected = $(this).text();
+        $(this).parents('.btn-group')
+            .find('.custom-dropdown-title')
+            .text(selected);
+        var dataValue = $(this).attr("data-value");
+        $(this).parents('.btn-group')
+            .find('input[type=hidden]')
+            .val(dataValue);
+    });
+</script>

@@ -64,5 +64,28 @@ namespace Mvc.Ux.Demos.Controllers
             var model = new ViewModelBase();
             return View(model);
         }
+
+        /// <summary>
+        /// MODULE 5: Taking Care of Those That Bootstrap Left Behind
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("bsext")]
+        public ActionResult BsExtForGet()
+        {
+            var model = new ViewModelBase();
+            return View(model);
+        }
+
+        /// <summary>
+        /// MODULE 5: Taking Care of Those That Bootstrap Left Behind
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("bsext")]
+        public ActionResult BsExtForPost(string yourSkills1, string yourSkills2)
+        {
+            return RedirectToAction("bsext");
+        }
     }
 }

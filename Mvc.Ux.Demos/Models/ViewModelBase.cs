@@ -15,7 +15,7 @@ namespace Mvc.Ux.Demos.Models
         public ViewModelBase(string title = "")
         {
             if (title.IsNullOrWhitespace())
-                title = "MVC-UX: Picking";
+                title = "MVC-UX";
             Title = title;
         }
 
