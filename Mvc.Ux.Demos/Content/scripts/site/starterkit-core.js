@@ -139,8 +139,8 @@ StarterKit.mobilize = function () {
 /// <summary>
 /// Handles MultipleViewResult responses
 /// </summary>
-//Capua.processMultipleAjaxResponse = function (response) {
-//    var chunkSeparator = "---|||---";
-//    var tokens = response.split(chunkSeparator);
-//    return tokens;
-//};
+StarterKit.processMultipleAjaxResponse = function (response) {
+    var chunkSeparator = "---|||---";
+    var tokens = response.split(chunkSeparator);
+    return tokens;
+};

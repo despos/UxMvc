@@ -47,6 +47,9 @@
     <Reference Include="Expoware.Youbiquitous, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\youbiquitous-lib.1.0.2\lib\net45\Expoware.Youbiquitous.dll</HintPath>
     </Reference>
+    <Reference Include="Expoware.Youbiquitous.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\youbiquitous-mvc-lib.1.1.2\lib\net45\Expoware.Youbiquitous.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -59,7 +62,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -79,7 +81,6 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -101,6 +102,9 @@
     <Content Include="Views\Home\tech.cshtml" />
     <Content Include="Views\Demo\pswd.cshtml" />
     <Content Include="Views\Demo\BsExt.cshtml" />
+    <Content Include="Views\Demo\Dropdown.cshtml" />
+    <Content Include="Views\Shared\pv_ListOfCustomers.cshtml" />
+    <Content Include="Views\Shared\pv_OnBehalfOfCustomers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -138,6 +142,8 @@
     <Compile Include="Backend\Model\Country.cs" />
     <Compile Include="Backend\Model\Country.Html.cs" />
     <Compile Include="Backend\Persistence\CountryRepository.cs" />
+    <Compile Include="Backend\Model\Customer.cs" />
+    <Compile Include="Backend\Persistence\CustomerRepository.cs" />
     <Compile Include="Common\AutoCompleteItem.cs" />
     <Compile Include="Common\MiscExtensions.cs" />
     <Compile Include="Controllers\CountryController.cs" />
@@ -147,6 +153,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Demo\CustomerListViewModel.cs" />
     <Compile Include="Models\Demo\DateViewModel.cs" />
     <Compile Include="Models\Demo\CountryListViewModel.cs" />
     <Compile Include="Models\Home\HomeViewModel.cs" />

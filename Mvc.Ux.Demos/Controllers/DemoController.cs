@@ -8,6 +8,7 @@
 
 using System;
 using System.Web.Mvc;
+using Expoware.Youbiquitous.Mvc.Results;
 using Mvc.Ux.Demos.Application;
 using Mvc.Ux.Demos.Models;
 using Mvc.Ux.Demos.Models.Demo;
@@ -86,6 +87,29 @@ namespace Mvc.Ux.Demos.Controllers
         public ActionResult BsExtForPost(string yourSkills1, string yourSkills2)
         {
             return RedirectToAction("bsext");
+        }
+
+        /// <summary>
+        /// MODULE 6: Being Tidy and Clean with Drop-down Content
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Dropdown()
+        {
+            var model = _service.GetCustomerListViewModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("d")]
+        public ActionResult DeleteCustomer(int id)
+        {
+            var model = _service.TryDeleteCustomer(id);
+
+            // Return 
+            var result = new MultipleActionResult(
+                PartialView("pv_ListOfCustomers", model),
+                PartialView("pv_OnBehalfOfCustomers", model));
+            return result;
         }
     }
 }
