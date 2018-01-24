@@ -90,6 +90,12 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <EmbeddedResource Include="Backend\Persistence\Countries.json" />
     <None Include="packages.config" />
+    <Content Include="Content\images\desktop.png" />
+    <Content Include="Content\images\featurephone.png" />
+    <Content Include="Content\images\other.png" />
+    <Content Include="Content\images\Smartphone.png" />
+    <Content Include="Content\images\smarttv.png" />
+    <Content Include="Content\images\tablet.png" />
     <Content Include="Content\scripts\bootstrap-select.min.js" />
     <Content Include="Content\styles\bootstrap-select.min.css" />
     <Content Include="Views\Home\index.cshtml" />
@@ -101,10 +107,11 @@
     <Content Include="Views\Demo\date.cshtml" />
     <Content Include="Views\Home\tech.cshtml" />
     <Content Include="Views\Demo\pswd.cshtml" />
-    <Content Include="Views\Demo\BsExt.cshtml" />
-    <Content Include="Views\Demo\Dropdown.cshtml" />
+    <Content Include="Views\Demo\bsext.cshtml" />
+    <Content Include="Views\Demo\dropdown.cshtml" />
     <Content Include="Views\Shared\pv_ListOfCustomers.cshtml" />
     <Content Include="Views\Shared\pv_OnBehalfOfCustomers.cshtml" />
+    <Content Include="Views\Demo\device.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

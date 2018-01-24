@@ -1,0 +1,42 @@
+﻿@model Mvc.Ux.Demos.Models.ViewModelBase
+
+<!-- WURFL.JS is added in the layout page -->
+
+<div class="container">
+    <div class="hidden-mobile">
+        <h2><b>MOD 07 ::</b> What If It’s Truly Mobile?
+        </h2>
+        <div style="margin-top: 60px"></div>
+    </div>
+
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="col-xs-3">
+            <img id="icon"
+                 class="img-responsive"
+                 alt=""
+                 onerror="this.src = '/content/images/other.png'"/>
+        </div>
+        <div class="col-xs-9">
+            <h1 id="factor"></h1>
+            <h3 id="name"></h3>
+            <small id="mobile"></small>
+        </div>
+        <hr/>
+        <div class="alert alert-info" style="font-size: 2em; display: none;" id="appLink"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function () {
+        var formFactor = window.WURFL.form_factor;
+        $("#factor").html(formFactor);
+        $("#name").html(window.WURFL.complete_device_name);
+        $("#icon").attr("src", "/content/images/" + formFactor + ".png");
+        $("#mobile").html(window.WURFL.is_mobile ? "Not a desktop browser" : "Desktop browser");
+
+        if (window.WURFL.is_mobile) {
+            $("#appLink").html("Show here the link to the app").show();
+        }
+    });
+</script>

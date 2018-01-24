@@ -99,6 +99,10 @@ namespace Mvc.Ux.Demos.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// MODULE 6: Being Tidy and Clean with Drop-down Content
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ActionName("d")]
         public ActionResult DeleteCustomer(int id)
@@ -110,6 +114,16 @@ namespace Mvc.Ux.Demos.Controllers
                 PartialView("pv_ListOfCustomers", model),
                 PartialView("pv_OnBehalfOfCustomers", model));
             return result;
+        }
+
+        /// <summary>
+        /// MODULE 7: What If It’s Truly Mobile?
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Device()
+        {
+            var model = new ViewModelBase();
+            return View(model);
         }
     }
 }
