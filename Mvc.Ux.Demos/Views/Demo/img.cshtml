@@ -1,0 +1,60 @@
+﻿@model Mvc.Ux.Demos.Models.ViewModelBase
+
+<div class="container">
+    <h2><b>MOD 08 ::</b> Auto-adaptive Images
+    </h2>
+    <div style="margin-top: 60px"></div>
+
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+        
+        <div class="hidden">
+            <h4>PICTURE element</h4>
+            <picture>
+                <source media="(min-width: 481px)"
+                        srcset="~/content/images/poppies_md.jpg">
+                <source media="(max-width: 480px)"
+                        srcset="~/content/images/poppies_xs.jpg">
+                <img src="~/content/images/poppies.jpg" alt="Poppies"
+                     class="img-responsive"
+                     style="border: solid 1px #111">
+            </picture>
+        </div>
+
+        <div>
+            <hr/>
+            <!-- Learn about ImageEngine at https://www.scientiamobile.com/page/imageengine -->
+
+            <img id="img1" src="http://try.imgeng.in/http://www.expoware.org/images/tennis1.jpg"/>
+
+            <h3 class="text-center">
+                <span>OPTIMIZED FOR DEVICE</span>
+                <span id="msg1" style="color: red"></span>
+            </h3>
+
+            <hr/>
+            <h3 class="text-center">
+                <span>ORIGINAL</span>
+                <span id="msg2" style="color: red"></span>
+            </h3>
+            <img id="img2" src="http://www.expoware.org/images/tennis1.jpg"/>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        var img1 = document.getElementById('img1');
+        var width = img1.clientWidth;
+        var height = img1.clientHeight;
+        document.getElementById('msg1').innerHTML = width.toString() + " x " + height.toString();
+        $("#img1").addClass("img-responsive");
+
+
+        var img2 = document.getElementById('img2');
+        var width = img2.clientWidth;
+        var height = img2.clientHeight;
+        document.getElementById('msg2').innerHTML = width.toString() + " x " + height.toString();
+        $("#img2").addClass("img-responsive");
+    });
+</script>

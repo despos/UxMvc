@@ -93,6 +93,9 @@
     <Content Include="Content\images\desktop.png" />
     <Content Include="Content\images\featurephone.png" />
     <Content Include="Content\images\other.png" />
+    <Content Include="Content\images\poppies.jpg" />
+    <Content Include="Content\images\poppies_md.jpg" />
+    <Content Include="Content\images\poppies_xs.jpg" />
     <Content Include="Content\images\Smartphone.png" />
     <Content Include="Content\images\smarttv.png" />
     <Content Include="Content\images\tablet.png" />
@@ -112,6 +115,7 @@
     <Content Include="Views\Shared\pv_ListOfCustomers.cshtml" />
     <Content Include="Views\Shared\pv_OnBehalfOfCustomers.cshtml" />
     <Content Include="Views\Demo\device.cshtml" />
+    <Content Include="Views\Demo\img.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

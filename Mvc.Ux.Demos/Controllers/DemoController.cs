@@ -125,5 +125,15 @@ namespace Mvc.Ux.Demos.Controllers
             var model = new ViewModelBase();
             return View(model);
         }
+
+        /// <summary>
+        /// MODULE 8: Auto-adaptive Images
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Img()
+        {
+            var model = new ViewModelBase();
+            return View(model);
+        }
     }
 }
