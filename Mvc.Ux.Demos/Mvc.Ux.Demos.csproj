@@ -89,6 +89,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <EmbeddedResource Include="Backend\Persistence\Countries.json" />
+    <None Include="bundleconfig.json" />
     <None Include="packages.config" />
     <Content Include="Content\images\desktop.png" />
     <Content Include="Content\images\featurephone.png" />
@@ -100,7 +101,19 @@
     <Content Include="Content\images\smarttv.png" />
     <Content Include="Content\images\tablet.png" />
     <Content Include="Content\scripts\bootstrap-select.min.js" />
+    <Content Include="Content\scripts\site\ybq-core.js" />
+    <Content Include="Content\scripts\site\ybq-core.min.js">
+      <DependentUpon>ybq-core.js</DependentUpon>
+    </Content>
+    <Content Include="Content\scripts\site\ybq-coreinit.js" />
+    <Content Include="Content\scripts\site\ybq-coreinit.min.js">
+      <DependentUpon>ybq-coreinit.js</DependentUpon>
+    </Content>
     <Content Include="Content\styles\bootstrap-select.min.css" />
+    <Content Include="Content\styles\typeahead.min.css">
+      <DependentUpon>typeahead.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\ybq-core.min.css" />
     <Content Include="Views\Home\index.cshtml" />
     <Content Include="Views\Shared\pv_UxDebug.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -116,6 +129,10 @@
     <Content Include="Views\Shared\pv_OnBehalfOfCustomers.cshtml" />
     <Content Include="Views\Demo\device.cshtml" />
     <Content Include="Views\Demo\img.cshtml" />
+    <Content Include="Views\Demo\lgform.cshtml" />
+    <Content Include="Views\Demo\pv_lgform_emails.cshtml" />
+    <Content Include="Views\Demo\pv_lgform_general.cshtml" />
+    <Content Include="Views\Demo\pv_lgform_password.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -130,17 +147,13 @@
     <Content Include="Content\scripts\bootstrap.min.js" />
     <Content Include="Content\scripts\jquery-3.1.1.min.js" />
     <Content Include="Content\scripts\modules\module-picking.js" />
-    <Content Include="Content\scripts\site\starterkit-core.js" />
-    <Content Include="Content\scripts\site\starterkit-coreinit.js" />
     <Content Include="Content\scripts\site\starterkit-login.js" />
     <Content Include="Content\scripts\typeahead.bundle.min.js" />
     <Content Include="Content\scripts\typeahead.container.js" />
     <Content Include="Content\styles\bootstrap-datepicker3.min.css" />
     <Content Include="Content\styles\bootstrap.min.css" />
     <Content Include="Content\styles\font-awesome.min.css" />
-    <Content Include="Content\styles\site\starterkit-app.css" />
     <Content Include="Content\styles\site\starterkit-login.css" />
-    <Content Include="Content\styles\starterkit-core.css" />
     <Content Include="Content\styles\typeahead.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

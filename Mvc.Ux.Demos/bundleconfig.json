@@ -1,0 +1,20 @@
+[
+  {
+    "outputFileName": "Content/styles/typeahead.min.css",
+    "inputFiles": [
+      "Content/styles/typeahead.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/scripts/site/ybq-core.min.js",
+    "inputFiles": [
+      "Content/scripts/site/ybq-core.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/scripts/site/ybq-coreinit.min.js",
+    "inputFiles": [
+      "Content/scripts/site/ybq-coreinit.js"
+    ]
+  }
+]

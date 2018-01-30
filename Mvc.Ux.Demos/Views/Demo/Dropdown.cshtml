@@ -36,7 +36,7 @@
         var url = "/demo/d/";
         $.post(url, { id: id })
             .done(function (response) {
-                var chunks = StarterKit.processMultipleAjaxResponse(response);
+                var chunks = Ybq.processMultipleAjaxResponse(response);
                 $("#listOfCustomers").html(chunks[0]);
                 $("#onBehalfMenu").html(chunks[1]);
             });

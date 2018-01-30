@@ -135,5 +135,15 @@ namespace Mvc.Ux.Demos.Controllers
             var model = new ViewModelBase();
             return View(model);
         }
+
+        /// <summary>
+        /// MODULE 9: Large input forms
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LgForm()
+        {
+            var model = new ViewModelBase();
+            return View(model);
+        }
     }
 }
