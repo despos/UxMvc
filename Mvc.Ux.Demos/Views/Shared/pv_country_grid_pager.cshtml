@@ -1,0 +1,7 @@
+﻿@using PagedList.Mvc
+@model Mvc.Ux.Demos.Models.Demo.PagedCountryListViewModel
+
+@Html.PagedListPager(
+            Model.CountriesInPage,
+            page => "javascript:_p(" + page + "," + Model.CountriesInPage.PageSize + ")")
+

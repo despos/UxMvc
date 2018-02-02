@@ -18,6 +18,7 @@ namespace Mvc.Ux.Demos.Controllers
     public class DemoController : Controller
     {
         private readonly DemoService _service = new DemoService();
+        private readonly CountryService _countryService = new CountryService();
 
         /// <summary>
         /// MODULE 2: Picking Items from a Long List
@@ -143,6 +144,27 @@ namespace Mvc.Ux.Demos.Controllers
         public ActionResult LgForm()
         {
             var model = new ViewModelBase();
+            return View(model);
+        }
+
+        /// <summary>
+        /// MODULE 10: Better tables
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Tables()
+        {
+            var model = _countryService.GetCountryListViewModel();
+            return View(model);
+        }
+
+        /// <summary>
+        /// MODULE 11: Paging
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Paging()
+        {
+            //var model = _countryService.GetPagedCountryListViewModel(1, 10);
+            var model = new PagedCountryListViewModel() { Header = new HeaderViewModel(246) };
             return View(model);
         }
     }

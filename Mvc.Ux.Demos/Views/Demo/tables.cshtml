@@ -1,0 +1,185 @@
+﻿@using Expoware.Youbiquitous.Extensions
+@model Mvc.Ux.Demos.Models.Demo.CountryListViewModel
+
+@{
+    const int maxInitialNumber = 40;
+    const int chunkSize = 10;
+}
+
+@section adhoc_Css {
+    <link rel="stylesheet" href="~/content/styles/jquery.datatables.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/content/styles/fixedcolumns.datatables.min.css" type="text/css" />
+}
+@section adhoc_Scripts_Top {
+    <script src="~/content/scripts/jquery.dataTables.min.js"></script>
+    <script src="~/content/scripts/dataTables.fixedColumns.min.js"></script>
+}
+       
+
+<style>
+    th, td {
+        white-space: nowrap;
+    }
+
+    div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <h2><b>MOD 10 ::</b> Making Smarter Tables and Data Grids</h2>
+            <div style="margin-top: 60px"></div>
+        </div>
+    </div>
+
+    <div class="row hidden">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <table class="table table-condensed table-hover" 
+                   style="font-size: 1.3em;">
+                <caption>Standard table</caption>
+                <thead>
+                <tr>
+                    <th width="40%">Name</th>
+                    <th width="30%" class="hidden-xs">Capital</th>
+                    <th class="hidden-xs">Continent</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var country in Model.Countries)
+                {
+                    <tr data-id="@country.CountryCode">
+                        <td>@country.CountryName</td>
+                        <td class="hidden-xs">@country.Capital</td>
+                        <td class="hidden-xs" data-noselect="true">
+                            <div class="dropdown">
+                                <button type="button" 
+                                        class="btn btn-info dropdown-toggle" 
+                                        style="width: 180px"
+                                        data-toggle="dropdown">
+                                    @country.ContinentName 
+                                    <i class="fa fa-chevron-down pull-right"></i>
+                                </button>
+                                <div class="dropdown-menu" 
+                                     style="padding: 10px; border: solid 3px rgb(38,154,188); margin-top: -1px; border-radius: 0; width: 100%;">
+                                    @country.AreaFormatted() kmq <hr/>
+                                    @country.CurrencyCode.ToDefault("N/A") <hr />
+                                    @country.PopulationFormatted() people  
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="row hidden">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <div id="my-grid-container"
+                 style="width: 650px; padding: 2px; border: solid 3px #111;">
+                <table id="my-grid"
+                       style="background: white;"
+                       class="table table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th width="100px">Name</th>
+                        <th width="100px">Capital</th>
+                        <th width="100px">People</th>
+                        <th>Area</th>
+                        <th>Continent</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var country in Model.Countries)
+                    {
+                        <tr data-id="@country.CountryCode">
+                            <td style="background: beige">@country.CountryName</td>
+                            <td>@country.Capital</td>
+                            <td>@country.Population</td>
+                            <td>@country.AreaInSqKm</td>
+                            <td>@country.ContinentName</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <table id="list" 
+                   class="table table-condensed table-hover" 
+                   style="font-size: 1.3em;"
+                   data-last="@maxInitialNumber">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Capital</th>
+                    <th>Continent</th>
+                </tr>
+                </thead>
+                <tbody>
+                @Html.Partial("pv_country_table_items", Model.Countries.Take(maxInitialNumber).ToList())
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".table-hover").css("cursor", "pointer");
+    $(".table-hover td").click(function () {
+        var isClickable = $(this).data("noselect");
+        if (isClickable === true)
+            return;
+        var id = $(this).parent().data("id");
+        alert("Code of selected country: " + id);
+    });
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var table = $('#my-grid').DataTable({
+            scrollY: "400px",
+            scrollX: true,
+            scrollCollapse: true,
+            paging: false,
+            searching: false,
+            ordering: false,
+            info: false,
+            fixedColumns: {
+                leftColumns: 1
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(window).on("scroll", function () {
+        var scrollHeight = $(document).height();
+        var scrollPosition = $(window).height() + $(window).scrollTop();
+        if ((scrollHeight - scrollPosition) / scrollHeight <= 0.02) {
+
+            // When scrolling reach the bottom of the page
+            var from = parseInt($("#list").attr("data-last"));
+            var size = @chunkSize;
+            var url = "/country/more?view=pv_country_table_items&from=" +
+                       from + "&howMany=" + size;
+
+            $.ajax({ url: url, cache: false })
+                .done(function (markup) {
+                    $("#list").attr("data-last", from + size);     
+                    $("#list tr:last").after(markup);
+                });
+        }  
+    });
+</script>
+

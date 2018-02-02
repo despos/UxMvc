@@ -6,6 +6,8 @@
 // Youbiquitous.net
 //
 
+using System;
+
 namespace Mvc.Ux.Demos.Backend.Model
 {
     // Declared STRUCT to avoid memrefs overlapping in LINQ
@@ -22,5 +24,23 @@ namespace Mvc.Ux.Demos.Backend.Model
         public string AreaInSqKm { get; set; }
         public string Languages { get; set; }
         public string GeonameId { get; set; }
+
+        public string PopulationFormatted()
+        {
+            double people = 0;
+            var outcome = double.TryParse(Population, out people);
+            return outcome 
+                ? string.Format("{0:n0}", people) 
+                : Population;
+        }
+
+        public string AreaFormatted()
+        {
+            double area = 0;
+            var outcome = double.TryParse(AreaInSqKm, out area);
+            return outcome
+                ? string.Format("{0:n0}", area)
+                : AreaInSqKm;
+        }
     }
 }

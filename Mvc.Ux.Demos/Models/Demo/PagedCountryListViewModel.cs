@@ -6,20 +6,19 @@
 // Youbiquitous.net
 //
 
-using System.Collections.Generic;
 using Mvc.Ux.Demos.Backend.Model;
+using PagedList;
 
 namespace Mvc.Ux.Demos.Models.Demo
 {
-    public class CountryListViewModel : ViewModelBase
+    public class PagedCountryListViewModel : ViewModelBase
     {
-        public CountryListViewModel()
+        public PagedCountryListViewModel()
         {
-            Countries = new List<Country>();
             Header = new HeaderViewModel();
         }
 
-        public IList<Country> Countries { get; set; }
+        public PagedList<Country> CountriesInPage { get; set; }
         public HeaderViewModel Header { get; set; }
     }
 }

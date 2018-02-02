@@ -1,0 +1,59 @@
+﻿@model Mvc.Ux.Demos.Models.Demo.PagedCountryListViewModel
+
+@section adhoc_Css {
+    <link href="~/content/styles/pagedlist.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <h2><b>MOD 11 ::</b> The Tricky Art of Paging</h2>
+            <div style="margin-top: 60px"></div>
+        </div>
+    </div>
+    
+    <div id="grid">
+        <!-- dynamically populated upon page loading -->
+    </div> 
+
+    <div id="pager" style="text-align:center">
+        <img id="loader" style="display:none" 
+             src="@Url.Content("~/content/images/loading.gif")" alt="..." />
+        <!-- dynamically populated upon page loading -->
+    </div>
+</div>
+
+<script type="text/javascript">
+    // Load first page
+    _p(1, 10);
+
+    // Load other pages
+    function _p(pageIndex, pageSize) {
+        var url = Ybq.fromServer("/country/page?p=") + pageIndex + "&s=" + pageSize;
+        $("#loader").show();
+        $.ajax({ url: url, cache: false })
+            .done(function (response) {
+                $("#loader").hide();
+                window.location.hash = pageIndex;
+
+                // Refresh page content and pager
+                var chunks = Ybq.processMultipleAjaxResponse(response);
+                $("#grid").html(chunks[0]);
+                $("#pager").html(chunks[1]);
+                setup();
+            });
+    }
+</script>
+
+<script>
+    function setup() {
+        $(".table-hover").css("cursor", "pointer");
+        $(".table-hover td").click(function () {
+            var isClickable = $(this).data("noselect");
+            if (isClickable === true)
+                return;
+            var id = $(this).parent().data("id");
+            alert(id);
+        });
+    }
+</script>

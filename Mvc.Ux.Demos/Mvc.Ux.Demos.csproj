@@ -60,6 +60,12 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -93,6 +99,7 @@
     <None Include="packages.config" />
     <Content Include="Content\images\desktop.png" />
     <Content Include="Content\images\featurephone.png" />
+    <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\other.png" />
     <Content Include="Content\images\poppies.jpg" />
     <Content Include="Content\images\poppies_md.jpg" />
@@ -100,7 +107,10 @@
     <Content Include="Content\images\Smartphone.png" />
     <Content Include="Content\images\smarttv.png" />
     <Content Include="Content\images\tablet.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\scripts\bootstrap-select.min.js" />
+    <Content Include="Content\scripts\dataTables.fixedColumns.min.js" />
+    <Content Include="Content\scripts\jquery.dataTables.min.js" />
     <Content Include="Content\scripts\site\ybq-core.js" />
     <Content Include="Content\scripts\site\ybq-core.min.js">
       <DependentUpon>ybq-core.js</DependentUpon>
@@ -110,6 +120,15 @@
       <DependentUpon>ybq-coreinit.js</DependentUpon>
     </Content>
     <Content Include="Content\styles\bootstrap-select.min.css" />
+    <Content Include="Content\styles\fixedcolumns.datatables.css" />
+    <Content Include="Content\styles\fixedcolumns.datatables.min.css">
+      <DependentUpon>fixedcolumns.datatables.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\jquery.datatables.css" />
+    <Content Include="Content\styles\jquery.datatables.min.css">
+      <DependentUpon>jquery.datatables.css</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\pagedlist.css" />
     <Content Include="Content\styles\typeahead.min.css">
       <DependentUpon>typeahead.css</DependentUpon>
     </Content>
@@ -133,6 +152,12 @@
     <Content Include="Views\Demo\pv_lgform_emails.cshtml" />
     <Content Include="Views\Demo\pv_lgform_general.cshtml" />
     <Content Include="Views\Demo\pv_lgform_password.cshtml" />
+    <Content Include="Views\Demo\tables.cshtml" />
+    <Content Include="Views\Demo\pv_country_item.cshtml" />
+    <Content Include="Views\Shared\pv_country_table_items.cshtml" />
+    <Content Include="Views\Demo\paging.cshtml" />
+    <Content Include="Views\Shared\pv_country_grid.cshtml" />
+    <Content Include="Views\Shared\pv_country_grid_pager.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -177,9 +202,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Demo\CustomerListViewModel.cs" />
+    <Compile Include="Models\CustomerListViewModel.cs" />
     <Compile Include="Models\Demo\DateViewModel.cs" />
     <Compile Include="Models\Demo\CountryListViewModel.cs" />
+    <Compile Include="Models\Demo\HeaderViewModel.cs" />
+    <Compile Include="Models\Demo\PagedCountryListViewModel.cs" />
     <Compile Include="Models\Home\HomeViewModel.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,42 @@
+﻿@*@model IList<Mvc.Ux.Demos.Backend.Model.Country>*@
+@using Expoware.Youbiquitous.Extensions
+@model Mvc.Ux.Demos.Models.Demo.PagedCountryListViewModel
+
+
+<table class="table table-condensed table-hover">
+    <thead>
+    <tr>
+        <th width="40%">Name</th>
+        <th width="30%">Capital</th>
+        <th>Continent</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var country in Model.CountriesInPage.ToList())
+    {
+        <tr data-id="@country.CountryCode">
+            <td>@country.CountryName</td>
+            <td>@country.Capital</td>
+            <td data-noselect="true">
+                @*<span class="text-primary">@country.Continent</span>*@
+                <div class="dropdown">
+                    <button type="button" 
+                            class="btn btn-info dropdown-toggle" 
+                            style="width: 180px"
+                            data-toggle="dropdown">
+                        @country.ContinentName 
+                        <i class="fa fa-chevron-down pull-right"></i>
+                    </button>
+                    <div class="dropdown-menu" 
+                         style="padding: 10px; border: solid 3px rgb(38,154,188); margin-top: -1px; border-radius: 0; width: 100%;">
+                        @country.AreaFormatted() kmq <hr/>
+                        @country.CurrencyCode.ToDefault("N/A") <hr />
+                        @country.PopulationFormatted() people  
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

@@ -16,5 +16,17 @@
     "inputFiles": [
       "Content/scripts/site/ybq-coreinit.js"
     ]
+  },
+  {
+    "outputFileName": "Content/styles/jquery.datatables.min.css",
+    "inputFiles": [
+      "Content/styles/jquery.datatables.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/styles/fixedcolumns.datatables.min.css",
+    "inputFiles": [
+      "Content/styles/fixedcolumns.datatables.css"
+    ]
   }
 ]

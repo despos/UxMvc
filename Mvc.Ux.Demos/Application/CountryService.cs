@@ -6,9 +6,12 @@
 // Youbiquitous.net
 //
 
+using System.Linq;
 using Mvc.Ux.Demos.Backend.Model;
 using Mvc.Ux.Demos.Backend.Persistence;
 using Mvc.Ux.Demos.Common;
+using Mvc.Ux.Demos.Models.Demo;
+using PagedList;
 
 namespace Mvc.Ux.Demos.Application
 {
@@ -28,6 +31,28 @@ namespace Mvc.Ux.Demos.Application
         {
             var country = _countryRepository.Find(code);
             return country;
+        }
+
+        public CountryListViewModel GetCountryListViewModel()
+        {
+            var all = _countryRepository.All().ToList();
+            var model = new CountryListViewModel
+            {
+                Countries = all,
+                Header = new HeaderViewModel(all.Count())
+            };
+            return model;
+        }
+
+        public PagedCountryListViewModel GetPagedCountryListViewModel(int pageIndex, int pageSize)
+        {
+            var all = _countryRepository.All().ToList();
+            var model = new PagedCountryListViewModel
+            {
+                Header = new HeaderViewModel(all.Count),
+                CountriesInPage = new PagedList<Country>(all, pageIndex, pageSize)
+            };
+            return model;
         }
     }
 }
