@@ -158,6 +158,7 @@
     <Content Include="Views\Demo\paging.cshtml" />
     <Content Include="Views\Shared\pv_country_grid.cshtml" />
     <Content Include="Views\Shared\pv_country_grid_pager.cshtml" />
+    <Content Include="Views\Demo\feedback.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -194,6 +195,7 @@
     <Compile Include="Backend\Model\Customer.cs" />
     <Compile Include="Backend\Persistence\CustomerRepository.cs" />
     <Compile Include="Common\AutoCompleteItem.cs" />
+    <Compile Include="Common\CommandResponse.cs" />
     <Compile Include="Common\MiscExtensions.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HintController.cs" />
@@ -202,7 +204,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomerListViewModel.cs" />
+    <Compile Include="Models\Demo\CustomerListViewModel.cs" />
+    <Compile Include="Models\Demo\SignupViewModel.cs" />
     <Compile Include="Models\Demo\DateViewModel.cs" />
     <Compile Include="Models\Demo\CountryListViewModel.cs" />
     <Compile Include="Models\Demo\HeaderViewModel.cs" />

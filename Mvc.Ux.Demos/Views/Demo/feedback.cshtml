@@ -1,0 +1,53 @@
+﻿@model Mvc.Ux.Demos.Models.Demo.SignupViewModel
+
+<div class="hidden-xs col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <h2>SIGN UP</h2>
+    <div id="signup-form-message" class="alert alert-info" style="display: none;"></div>
+    <div class="margin-top-md">
+        <form class="form-horizontal" id="signup-form"
+              role="form" method="post"
+              action="@Url.Action("feedback", "demo")">
+            
+            <div class="form-group has-feedback" id="signup-form-group-name">
+                <label class="col-sm-2 control-label" for="name">User name</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control"
+                           id="name" name="name"
+                           autocomplete="off"
+                           value="@Model.Name"
+                           placeholder="User name">
+                    <i class="fa fa-user form-control-feedback"></i>
+                    <span class="block text-info">Can't be empty</span>
+                </div>
+            </div>
+            
+            <div class="form-group has-feedback" id="signup-form-group-address">
+                <label class="col-sm-2 control-label" for="address">Address</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control"
+                           id="address" name="address"
+                           autocomplete="off"
+                           value="@Model.Address"
+                           placeholder="Your address">
+                    <i class="fa fa-building form-control-feedback"></i>
+                </div>
+            </div>
+            <div class="text-center" >
+                <button id="signup-form-submit-button" type="button"
+                        class="btn btn-danger ">
+                    PROCEED
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#signup-form-submit-button").click(function() {
+        Ybq.postForm("#signup-form",
+            function(data) {
+                var response = JSON.parse(data);
+                Ybq.toast("#signup-form-message", response.Message, response.Success);
+            });
+    });
+</script>

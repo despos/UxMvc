@@ -8,8 +8,10 @@
 
 using System;
 using System.Web.Mvc;
+using Expoware.Youbiquitous.Extensions;
 using Expoware.Youbiquitous.Mvc.Results;
 using Mvc.Ux.Demos.Application;
+using Mvc.Ux.Demos.Common;
 using Mvc.Ux.Demos.Models;
 using Mvc.Ux.Demos.Models.Demo;
 
@@ -163,9 +165,36 @@ namespace Mvc.Ux.Demos.Controllers
         /// <returns></returns>
         public ActionResult Paging()
         {
-            //var model = _countryService.GetPagedCountryListViewModel(1, 10);
-            var model = new PagedCountryListViewModel() { Header = new HeaderViewModel(246) };
+            var model = new PagedCountryListViewModel { Header = new HeaderViewModel(246) };
             return View(model);
+        }
+
+        /// <summary>
+        /// MODULE 12: Feedback
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ActionName("Feedback")]
+        public ActionResult FeedbackGet(SignupViewModel input)
+        {
+            if (input == null)
+                input = new SignupViewModel();
+            return View(input);
+        }
+        [HttpPost]
+        [ActionName("Feedback")]
+        public ActionResult FeedbackPost(SignupViewModel input)
+        {
+            if (input == null)
+                return Json(CommandResponse.Fail.SetMessage("Invalid input"));
+            if (input.Name.IsNullOrWhitespace())
+                return Json(CommandResponse.Fail.SetMessage("Name is missing"));
+
+            var outcome = (DateTime.Now.Second % 2) > 0 
+                ? CommandResponse.Ok.SetMessage("Welcome to the team!")
+                : CommandResponse.Fail.SetMessage("Oops! Something went unexpectedly wrong.");
+
+            return Json(outcome);
         }
     }
 }
