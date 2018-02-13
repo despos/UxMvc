@@ -9,6 +9,7 @@
 using System;
 using System.Web.Mvc;
 using Expoware.Youbiquitous.Extensions;
+using Expoware.Youbiquitous.Mvc.Extensions;
 using Expoware.Youbiquitous.Mvc.Results;
 using Mvc.Ux.Demos.Application;
 using Mvc.Ux.Demos.Common;
@@ -195,6 +196,38 @@ namespace Mvc.Ux.Demos.Controllers
                 : CommandResponse.Fail.SetMessage("Oops! Something went unexpectedly wrong.");
 
             return Json(outcome);
+        }
+
+        /// <summary>
+        /// MODULE 13: Printing
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Printing(string t = "")
+        {
+            var model = _countryService.GetCountryListViewModel();
+            var view = t == "printer" ? "print_printer" : "print_html";
+            return View(view, model);
+        }
+
+        public ActionResult Pdf(string id)
+        {
+            var country = _countryService.GetCountryViewModel(id);
+            var htmlString = this.RenderPartialViewToString("pv_country_print_template", country);
+
+            var fullFileName = "";
+            try
+            {
+                var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+                fullFileName = Server.MapPath(UrlHelper.GenerateContentUrl(String.Format(
+                    "~/content/assets/{0}.pdf", country.CountryCode), HttpContext));
+                PdfService.Create(htmlString, fullFileName, baseUrl, country.CountryName);
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+
+            return File(fullFileName, "application/pdf", country.CountryName + ".pdf");
         }
     }
 }

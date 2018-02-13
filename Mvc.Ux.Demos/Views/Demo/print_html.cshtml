@@ -1,0 +1,83 @@
+﻿@using Expoware.Youbiquitous.Extensions
+@model Mvc.Ux.Demos.Models.Demo.CountryListViewModel
+
+@{
+    const int maxInitialNumber = 40;
+    const int chunkSize = 10;
+}
+  
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <h2><b>MOD 13 ::</b> The Nasty Art of Printing</h2>
+            <div style="margin-top: 60px"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <table class="table table-condensed table-hover" 
+                   style="font-size: 1.3em;">
+                <caption>
+                    HTML view of a country list
+                    <button class="btn btn-danger pull-right" id="btnPrint">
+                        <i class="fa fa-print"></i>&nbsp;
+                        PRINT
+                    </button>
+                </caption>
+                <thead>
+                <tr>
+                    <th width="40%">Name</th>
+                    <th width="30%" class="hidden-xs">Capital</th>
+                    <th class="hidden-xs">Continent</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var country in Model.Countries)
+                {
+                    <tr data-id="@country.CountryCode">
+                        <td>@country.CountryName</td>
+                        <td class="hidden-xs">@country.Capital</td>
+                        <td class="hidden-xs" data-noselect="true">
+                            <div class="dropdown">
+                                <button type="button" 
+                                        class="btn btn-info dropdown-toggle" 
+                                        style="width: 180px"
+                                        data-toggle="dropdown">
+                                    @country.ContinentName 
+                                    <i class="fa fa-chevron-down pull-right"></i>
+                                </button>
+                                <div class="dropdown-menu" 
+                                     style="padding: 10px; border: solid 3px rgb(38,154,188); margin-top: -1px; border-radius: 0; width: 100%;">
+                                    @country.AreaFormatted() kmq <hr/>
+                                    @country.CurrencyCode.ToDefault("N/A") <hr />
+                                    @country.PopulationFormatted() people  
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a role="button" class="btn btn-danger"
+                               title="Download content as PDF"
+                               href="@Url.Action("pdf", "demo", new {id = country.CountryCode})">
+                                <i class="fa fa-download"></i>&nbsp;
+                                <i class="fa fa-file-pdf-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $("#btnPrint").click(function() {
+        Ybq.printPopup("/demo/printing?t=printer");
+    })
+</script>

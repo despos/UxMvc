@@ -1,0 +1,35 @@
+﻿@using Expoware.Youbiquitous.Extensions
+@model Mvc.Ux.Demos.Models.Demo.CountryListViewModel
+
+@{
+    Layout = null;
+}
+      
+
+<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+    <table style="font-size: 1.3em;">
+        <thead>
+        <tr>
+            <th width="40%">Name</th>
+            <th width="30%">Capital</th>
+            <th>Continent</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var country in Model.Countries)
+        {
+            <tr>
+                <td>@country.CountryName</td>
+                <td>@country.Capital</td>
+                <td>
+                    @country.ContinentName 
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</div>
+
+
