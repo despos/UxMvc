@@ -217,10 +217,15 @@ namespace Mvc.Ux.Demos.Controllers
             var fullFileName = "";
             try
             {
-                var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
-                fullFileName = Server.MapPath(UrlHelper.GenerateContentUrl(String.Format(
-                    "~/content/assets/{0}.pdf", country.CountryCode), HttpContext));
-                PdfService.Create(htmlString, fullFileName, baseUrl, country.CountryName);
+                if (Request.Url != null)
+                {
+                    var fileName = UrlHelper.GenerateContentUrl(
+                        $"~/content/assets/{country.CountryCode}.pdf", HttpContext);
+                    fullFileName = Server.MapPath(fileName);
+
+                    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+                    PdfService.Create(htmlString, fullFileName, baseUrl, country.CountryName);
+                }
             }
             catch (Exception ex)
             {
