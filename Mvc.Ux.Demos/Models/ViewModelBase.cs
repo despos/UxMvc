@@ -20,5 +20,6 @@ namespace Mvc.Ux.Demos.Models
         }
 
         public string Title { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

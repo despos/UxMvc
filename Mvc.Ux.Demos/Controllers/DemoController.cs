@@ -15,6 +15,7 @@ using Mvc.Ux.Demos.Application;
 using Mvc.Ux.Demos.Common;
 using Mvc.Ux.Demos.Models;
 using Mvc.Ux.Demos.Models.Demo;
+using Mvc.Ux.Demos.Models.Extra;
 
 namespace Mvc.Ux.Demos.Controllers
 {
@@ -234,5 +235,51 @@ namespace Mvc.Ux.Demos.Controllers
 
             return File(fullFileName, "application/pdf", country.CountryName + ".pdf");
         }
+
+
+        #region EXTRAS
+        [HttpGet]
+        public ActionResult Simple()
+        {
+            var model = new ViewModelBase();
+
+            if (TempData["Error"] != null)
+            {
+                model.ErrorMessage = TempData["Error"].ToString();
+            }
+
+            return View("simpleform", model);
+        }
+
+        [HttpPost]
+        [ActionName("simple")]
+        public ActionResult TryRegisterForSpamming(SimpleFormInputModel input)
+        {
+            // Suppose you saved received info to some DB
+            if (String.IsNullOrEmpty(input.FirstName) ||
+                String.IsNullOrEmpty(input.LastName))
+            {
+                TempData["Error"] = "Invalid data received.";
+                //return RedirectToAction("simple", "demo");
+                throw new ArgumentException("Invalid data received.");
+            }
+
+            // Redirect
+            return RedirectToAction("thankyou", "demo");
+        }
+
+        [HttpGet]
+        public ActionResult ThankYou()
+        {
+            // Prepare response
+            var displayName = "";
+
+            var model = new ThankYouViewModel
+            {
+                DisplayName = displayName
+            };
+            return View("simpleform_thankyou", model);
+        }
+        #endregion
     }
 }

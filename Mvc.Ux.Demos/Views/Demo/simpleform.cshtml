@@ -1,0 +1,27 @@
+﻿@using System.Web.Mvc.Html
+@model Mvc.Ux.Demos.Models.ViewModelBase
+
+<div class="alert alert-danger" id="errorMessageLine">
+    @Model.ErrorMessage
+</div>
+
+<form action="@Url.Action("simple", "demo")" method="post">
+    <h1>SPAMMING SERVICE</h1>
+    <h3>Sign up to be spammed at will</h3>
+ 
+    <input type="text" name="firstname" value="" />
+    <input type="text" name="lastname" value="" />
+    <hr/>
+    @Html.CheckBox("rememberme", true)
+    <label for="rememberme">Spam all the time</label>
+    <div>
+        <input class="btn btn-lg btn-primary" type="submit" value="Yes, I want to be spammed" />
+    </div>
+</form>
+
+<script>
+    window.setTimeout(function() {
+            $("#errorMessageLine").hide();
+        },
+        3000);
+</script>

@@ -7,7 +7,10 @@
 //
 
 using System;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
+using Mvc.Ux.Demos.Controllers;
 
 namespace Mvc.Ux.Demos
 {
@@ -21,7 +24,28 @@ namespace Mvc.Ux.Demos
 
         protected void Application_Error(object sender, EventArgs e)
         {
+            var exception = Server.GetLastError();
 
-        }       
+            var httpContext = ((HttpApplication)sender).Context;
+            httpContext.Response.Clear();
+            httpContext.ClearError();
+            InvokeErrorAction(httpContext, exception);
+        }
+
+        #region PRIVATE (Error handling)
+        private static void InvokeErrorAction(HttpContext httpContext, Exception exception)
+        {
+            var routeData = new RouteData();
+            routeData.Values["controller"] = "app";
+            routeData.Values["action"] = "error";
+            routeData.Values["exception"] = exception;
+
+            using (var controller = new AppController())
+            {
+                ((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
+            }
+        }
+        #endregion
+
     }
 }
